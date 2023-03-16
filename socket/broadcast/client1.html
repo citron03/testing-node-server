@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Client 1</title>
+  </head>
+  <body>
+    <div>
+      <h1>Socket Test (client 1)</h1>
+      <div>
+        <p>hi</p>
+        <div id="items-container"></div>
+        <button class="broadcasting-btn">Broadcasting phrase</button>
+      </div>
+    </div>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+      const socket = io.connect("http://localhost:8050", {
+        path: "/test/socket",
+        transports: ["websocket"],
+      });
+      const container = document.querySelector("#items-container");
+      socket.on("PUSH NOTI", (msg) => {
+        // 보낸 클라이언트에서는 알림을 받을 수 없다.
+        console.log("GET");
+        const item = document.createElement("p");
+        item.textContent = msg;
+        container.appendChild(item);
+      });
+      //    broadcasting을 통해서 모든 클라이언트(1, 2)에 p 태그 추가
+      const btn = document.querySelector(".broadcasting-btn");
+      btn.addEventListener("click", () => {
+        socket.emit("REQUEST NOTI", "Client1 click the BUTTON!");
+      });
+    </script>
+  </body>
+</html>

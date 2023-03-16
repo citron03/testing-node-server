@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Client 3</title>
+  </head>
+  <body>
+    <div>
+      <h1>Socket Test (client 3)</h1>
+      <div>
+        <p>hi</p>
+        <div id="items-container"></div>
+      </div>
+    </div>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+      const socket = io.connect("http://localhost:8050", {
+        path: "/test/socket",
+        transports: ["websocket"],
+      });
+      const container = document.querySelector("#items-container");
+      socket.on("PUSH NOTI", (msg) => {
+        const item = document.createElement("p");
+        item.textContent = msg;
+        container.appendChild(item);
+      });
+    </script>
+  </body>
+</html>
