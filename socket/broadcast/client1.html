@@ -17,7 +17,8 @@
     </div>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
-      const socket = io.connect("http://localhost:8050", {
+      // ws와 http 모두 정상 동작
+      const socket = io.connect("ws://localhost:8050", {
         path: "/test/socket",
         transports: ["websocket"],
       });

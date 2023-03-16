@@ -17,6 +17,7 @@ io.on("connection", (socket) => {
   let count = 0;
   socket.on("REQUEST NOTI", (msg) => {
     console.log("broadcasting!!");
-    socket.broadcast.emit("PUSH NOTI", `${msg} - count: ${++count}`);
+    socket.emit("PUSH NOTI", `${msg} - count: ${++count}`); // 요청을 보낸 클라이언트에 응답
+    socket.broadcast.emit("PUSH NOTI", `${msg} - count: ${++count}`); // 요청을 보내지 않은 클라이언트들에게 응답
   });
 });
