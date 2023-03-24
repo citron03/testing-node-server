@@ -9,17 +9,22 @@ db.sequelize
 
 const { user } = require("./models");
 
-const initTest = async () => {
+const addUser = async (name, age, cash) => {
   const createdUser = await user.create({
-    name: "park",
-    age: 35,
-    cash: 30000,
+    name,
+    age,
+    cash,
   });
   console.log("createdUser", createdUser);
-  const findUser = await user.findOne({
-    where: { name: "park" },
-  });
-  console.log("findUser", findUser);
+  return createdUser;
 };
 
-initTest();
+const findUserByName = async (name) => {
+  const findUser = await user.findOne({
+    where: { name },
+  });
+  console.log("findUser", findUser);
+  return findUser;
+};
+
+module.exports = { addUser, findUserByName };

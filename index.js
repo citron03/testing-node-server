@@ -1,8 +1,10 @@
 const express = require("express");
 const session = require("express-session");
+const { addUser, findUserByName } = require("./testModel");
 // const cookieParser = require("cookie-parser");
 
 const app = express();
+app.use(express.json()); // use body
 // app.use(cookieParser());
 app.use(
   session({
@@ -28,6 +30,27 @@ app.get("/session", function (req, res, next) {
     console.log("No Sessions");
     res.status(201).send({ message: "RN_testing_session" });
   }
+});
+
+/*
+{
+  "name": "testman",
+  "age": 38,
+  "cash": 35000
+} 
+ */
+app.post("/test/add", async (req, res, next) => {
+  console.log(req.body);
+  const { name, age, cash } = req.body;
+  const createdUser = await addUser(name, age, cash);
+  res.status(201).send(createdUser);
+});
+
+// /test/find/testman
+app.get("/test/find/:name", async (req, res, next) => {
+  console.log(req.params.name);
+  const findUser = await findUserByName(req.params.name);
+  res.status(200).send(findUser);
 });
 
 app.listen(port, () => {
