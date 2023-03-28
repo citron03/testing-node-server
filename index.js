@@ -20,6 +20,13 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.get("/ip", (req, res) => {
+  // ::1은 IPv6 클라이언트의 로컬 호스트 주소의 단축 버전이며 전체 IP는 기술적으로 0:0:0:0:0:0:0:1입니다. IPv4 클라이언트의 127.0.0.1 주소와 동일합니다.
+  const ip = req.headers["x-forwarded-for"] || req.ip;
+  console.log("req.ip", ip);
+  res.status(200).send({ ip, message: "Check Your Ip" });
+});
+
 app.get("/session", function (req, res, next) {
   if (req.session.test) {
     console.log("req.session", req.session);
@@ -53,6 +60,11 @@ app.get("/test/find/:name", async (req, res, next) => {
   res.status(200).send(findUser);
 });
 
-app.listen(port, () => {
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`);
+// });
+
+// use IPv4
+app.listen(port, "0.0.0.0", () => {
   console.log(`Example app listening on port ${port}`);
 });
