@@ -1,9 +1,10 @@
 const express = require("express");
 const session = require("express-session");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
-const { addUser, findUserByName } = require("./testModel");
 // const cookieParser = require("cookie-parser");
+const ipRouter = require("./routers/ipRouter");
+const sessionRouter = require("./routers/sessionRouter");
+const testModelRouter = require("./routers/testModelRouter");
+const swaggerDocs = require("./swagger");
 
 const app = express();
 app.use(express.json()); // use body
@@ -32,61 +33,12 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
 });
 
-app.get("/ip", (req, res) => {
-  // ::1은 IPv6 클라이언트의 로컬 호스트 주소의 단축 버전이며 전체 IP는 기술적으로 0:0:0:0:0:0:0:1입니다. IPv4 클라이언트의 127.0.0.1 주소와 동일합니다.
-  const ip = req.headers["x-forwarded-for"] || req.ip;
-  console.log("req.ip", ip);
-  res.status(200).send({ ip, message: "Check Your Ip" });
-});
+// routers
+app.use("/", ipRouter);
+app.use("/", sessionRouter);
+app.use("/test", testModelRouter);
 
-app.get("/session", function (req, res, next) {
-  if (req.session.test) {
-    console.log("req.session", req.session);
-    req.session.test++;
-    res.status(200).json({ message: "Session Ok" });
-  } else {
-    req.session.test = 1;
-    console.log("No Sessions");
-    res.status(201).send({ message: "RN_testing_session" });
-  }
-});
-
-/*
-{
-  "name": "testman",
-  "age": 38,
-  "cash": 35000
-} 
- */
-app.post("/test/add", async (req, res, next) => {
-  console.log(req.body);
-  const { name, age, cash } = req.body;
-  const createdUser = await addUser(name, age, cash);
-  res.status(201).send(createdUser);
-});
-
-// /test/find/testman
-app.get("/test/find/:name", async (req, res, next) => {
-  console.log(req.params.name);
-  const findUser = await findUserByName(req.params.name);
-  res.status(200).send(findUser);
-});
-
-// use swagger
-const options = {
-  failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Hello World",
-      version: "1.0.0",
-    },
-  },
-  // apis: ["./src/routes*.js"],
-  apis: ["./index.js"],
-};
-const swaggerSpec = swaggerJsdoc(options); // use swagger-jsdoc
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(swaggerDocs);
 
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`);
