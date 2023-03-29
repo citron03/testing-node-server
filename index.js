@@ -1,5 +1,7 @@
 const express = require("express");
 const session = require("express-session");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 const { addUser, findUserByName } = require("./testModel");
 // const cookieParser = require("cookie-parser");
 
@@ -16,8 +18,18 @@ app.use(
 );
 
 const port = 8080;
+
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: test api
+ *     responses:
+ *       200:
+ *         description: Returns a string.
+ */
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.status(200).send("Hello World!");
 });
 
 app.get("/ip", (req, res) => {
@@ -59,6 +71,22 @@ app.get("/test/find/:name", async (req, res, next) => {
   const findUser = await findUserByName(req.params.name);
   res.status(200).send(findUser);
 });
+
+// use swagger
+const options = {
+  failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Hello World",
+      version: "1.0.0",
+    },
+  },
+  // apis: ["./src/routes*.js"],
+  apis: ["./index.js"],
+};
+const swaggerSpec = swaggerJsdoc(options); // use swagger-jsdoc
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`);
