@@ -22,11 +22,15 @@ test and learn node server
    - 바벨 설정 파일
 
 - Project-wide configuration
+  <br/>
   node_modules를 컴파일하고 싶습니까?
+  <br/>
   babel.config.json은 당신을 위한 것입니다!
 
 - File-relative configuration
+  <br/>
   프로젝트의 한 부분에만 적용되는 구성이 있습니까?
+  <br/>
   .babelrc.json은 당신을 위한 것입니다!
 
 ```json
@@ -38,10 +42,10 @@ test and learn node server
 - https://babeljs.io/docs/configuration
 - https://babeljs.io/docs/options
 
-4. script 설정
+1. script 설정
 
 ```json
-  "scripts": {
+"scripts": {
   "test-babel": "babel-node babel_test/index"
 },
 ```
