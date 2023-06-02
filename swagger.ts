@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const path = require("path");
+import path from "path";
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 
 // use swagger
 const options = {
@@ -26,10 +26,10 @@ const options = {
   },
   host: "localhost:8080",
   basePath: "/",
-  apis: ["./index.js", path.resolve(__dirname, "./routers/*.js")],
+  apis: ["./index.ts", path.resolve(__dirname, "./routers/*.ts")],
 };
 const swaggerSpec = swaggerJsdoc(options); // use swagger-jsdoc
 
 router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-module.exports = router;
+export default router;

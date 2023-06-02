@@ -1,4 +1,5 @@
-const express = require("express");
+import express from "express";
+import { Session, SessionData } from "express-session";
 const router = express.Router();
 
 /**
@@ -15,6 +16,14 @@ const router = express.Router();
  *       201:
  *         description: 서버에 처음 접근하는 사용자로 세션을 발급한다.
  */
+
+// interface 재정의로 merge
+declare module "express-session" {
+  interface SessionData {
+    test: number;
+  }
+}
+
 router.get("/session", function (req, res, next) {
   if (req.session.test) {
     console.log("req.session", req.session);
@@ -27,4 +36,4 @@ router.get("/session", function (req, res, next) {
   }
 });
 
-module.exports = router;
+export default router;

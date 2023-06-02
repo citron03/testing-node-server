@@ -1,5 +1,5 @@
-const express = require("express");
-const { addUser, findUserByName } = require("../testModel");
+import express from "express";
+import { addUser, findUserByName } from "../testModel";
 const router = express.Router();
 
 /**
@@ -39,4 +39,4 @@ router.get("/find/:name", async (req, res, next) => {
   res.status(200).send(findUser);
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
+import { Sequelize, DataTypes } from "sequelize";
+
+export type DataTypesType = typeof DataTypes;
+
+export default (sequelize: Sequelize, DataTypes: DataTypesType) => {
   const User = sequelize.define("user", {
     name: DataTypes.TEXT,
     favoriteColor: {

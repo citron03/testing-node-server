@@ -1,4 +1,4 @@
-const db = require("./models");
+import db from "./models";
 
 db.sequelize
   .sync()
@@ -9,7 +9,7 @@ db.sequelize
 
 const { user } = require("./models");
 
-const addUser = async (name, age, cash) => {
+const addUser = async (name: string, age: string, cash: string) => {
   const createdUser = await user.create({
     name,
     age,
@@ -19,7 +19,7 @@ const addUser = async (name, age, cash) => {
   return createdUser;
 };
 
-const findUserByName = async (name) => {
+const findUserByName = async (name: string) => {
   const findUser = await user.findOne({
     where: { name },
   });
@@ -27,4 +27,4 @@ const findUserByName = async (name) => {
   return findUser;
 };
 
-module.exports = { addUser, findUserByName };
+export { addUser, findUserByName };

@@ -1,10 +1,10 @@
-const express = require("express");
-const session = require("express-session");
-// const cookieParser = require("cookie-parser");
-const ipRouter = require("./routers/ipRouter");
-const sessionRouter = require("./routers/sessionRouter");
-const testModelRouter = require("./routers/testModelRouter");
-const swaggerDocs = require("./swagger");
+import express from "express";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import ipRouter from "./routers/ipRouter";
+import sessionRouter from "./routers/sessionRouter";
+import testModelRouter from "./routers/testModelRouter";
+import swaggerDocs from "./swagger";
 
 const app = express();
 app.use(express.json()); // use body
