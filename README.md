@@ -7,6 +7,7 @@ test and learn node server
 - 소켓 통신
 - TCP/IP 통신
 - swagger
+- static 폴더 정적 파일 접근 허용
 
 ---
 

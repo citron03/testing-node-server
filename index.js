@@ -17,6 +17,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+// app.use(express.static("static")); // static 폴더의 정적 파일
+app.use("/static", express.static("static")); // /static 가상 경로 사용하기
+// http://localhost:8080/static/mountains.jpg 경로를 통해서 이미지에 접근할 수 있다.
 
 const port = 8080;
 
