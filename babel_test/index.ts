@@ -6,6 +6,7 @@ const outputPath = path.join(__dirname, "dist");
 // console.log(`time stamp ${moment().format()} - "${outputPath}"`);
 
 class time {
+  private now: string;
   constructor() {
     this.now = moment().format();
   }

@@ -50,3 +50,5 @@ test and learn node server
   "test-babel": "babel-node babel_test/index"
 },
 ```
+
+- bable과 typescript @babel/preset-typescript
