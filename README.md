@@ -52,3 +52,4 @@ test and learn node server
 ```
 
 - bable과 typescript @babel/preset-typescript
+- babel-node의 typescript 설정 : https://dev.to/tylim88/babel-node-typescript-minus-ts-node-efa
