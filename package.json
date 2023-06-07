@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "test-mjs": "node babel_test/index_mjs.mjs",
-    "test-babel": "babel-node babel_test/index",
+    "test-babel": "babel-node babel_test/index.js",
     "test-babel-output": "babel babel_test/index.js --out-file dist/index.js"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.22.1",
+    "@babel/node": "^7.22.1",
     "@babel/preset-env": "^7.22.4",
     "nodemon": "^2.0.21"
   }
