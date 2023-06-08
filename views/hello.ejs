@@ -8,6 +8,7 @@
   </head>
   <body>
     <% if (names.length) { %>
+      <h1>total: <%= names.length %></h1>
         <ul>
           <% names.forEach(function (name) { %>
             <%# Notice how the single quotation mark is escaped in the output HTML %>
