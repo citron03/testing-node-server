@@ -8,6 +8,7 @@ test and learn node server
 - TCP/IP 통신
 - swagger
 - static 폴더 정적 파일 접근 허용
+- express 템플릿 엔진 ejs
 
 ---
 

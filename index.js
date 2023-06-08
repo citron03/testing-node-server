@@ -4,6 +4,7 @@ const session = require("express-session");
 const ipRouter = require("./routers/ipRouter");
 const sessionRouter = require("./routers/sessionRouter");
 const testModelRouter = require("./routers/testModelRouter");
+const templateRouter = require("./routers/templateRouter");
 const swaggerDocs = require("./swagger");
 
 const app = express();
@@ -36,10 +37,15 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
 });
 
+// ejs 설정
+app.set("view engine", "ejs"); // 원하는 엔진을 템플릿 엔진으로 사용하기 위한 설정
+app.set("views", "./views"); // view 파일들이 모여있는 폴더 지정
+
 // routers
 app.use("/", ipRouter);
 app.use("/", sessionRouter);
 app.use("/test", testModelRouter);
+app.use("/template", templateRouter);
 
 app.use(swaggerDocs);
 
