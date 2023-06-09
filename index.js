@@ -37,9 +37,9 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
 });
 
-// ejs 설정
-app.set("view engine", "ejs"); // 원하는 엔진을 템플릿 엔진으로 사용하기 위한 설정
-app.set("views", "./views"); // view 파일들이 모여있는 폴더 지정
+// pug 설정
+app.set("view engine", "pug");
+app.set("views", "./views");
 
 // routers
 app.use("/", ipRouter);
