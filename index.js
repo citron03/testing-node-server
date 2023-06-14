@@ -49,6 +49,12 @@ app.use("/template", templateRouter);
 
 app.use(swaggerDocs);
 
+app.use((err, req, res, next) => {
+  // 에러 처리 미들웨어. next(err) 는 모두 여기로 연결된다.
+  console.error(err);
+  res.status(200).send("ERROR !!");
+});
+
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`);
 // });
