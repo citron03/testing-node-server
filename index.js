@@ -5,6 +5,7 @@ const ipRouter = require("./routers/ipRouter");
 const sessionRouter = require("./routers/sessionRouter");
 const testModelRouter = require("./routers/testModelRouter");
 const templateRouter = require("./routers/templateRouter");
+const tokenRouter = require("./routers/tokenRouter");
 const swaggerDocs = require("./swagger");
 
 const app = express();
@@ -46,6 +47,7 @@ app.use("/", ipRouter);
 app.use("/", sessionRouter);
 app.use("/test", testModelRouter);
 app.use("/template", templateRouter);
+app.use("/token", tokenRouter);
 
 app.use(swaggerDocs);
 
