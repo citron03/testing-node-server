@@ -54,5 +54,6 @@ test and learn node server
 
 ### branches
 
+- main (ejs)
 - @typescript_apply
 - @pug_use
